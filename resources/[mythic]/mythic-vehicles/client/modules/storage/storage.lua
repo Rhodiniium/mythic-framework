@@ -186,6 +186,17 @@ function OpenVehicleStorage()
                         return
                     end
 
+                    local prop = Properties:Get(propertyGarage.propertyId)
+                    if prop and prop.keys ~= nil and prop.keys[LocalPlayer.state.Character:GetData("ID")] ~= nil then
+                        --Check if the player has access to the property garage
+                        if not prop.keys[LocalPlayer.state.Character:GetData("ID")] then
+                            Notification:Error('You Dont Have Access To This Property Garage')
+                        end
+                    else
+                        Notification:Error('You Dont Have Access To This Property Garage')
+                        return
+                    end
+
                     if #storedVehicles > 0 then
                         OpenVehicleStorageMenu(
                             2,
